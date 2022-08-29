@@ -7,7 +7,6 @@
     } catch (PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     } 
-    //$sql = "SELECT * FROM interact";
     $sql = "SELECT * FROM sample";
     $sth = $db -> query($sql);
     $aryList = $sth -> fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +25,7 @@
     if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         $message = filter_input(INPUT_POST, 'message');
         
-        //sessionよりユーザー情報の取得については実装していない。ハードコーディングで対応。
+        //ハードコーディングにてユーザーの送信元と宛先を指定
         $user_no_from = '1';
         $user_no_to = '2';
         $access = connectDB();
