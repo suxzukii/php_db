@@ -7,6 +7,7 @@
     } catch (PDOException $e) {
         echo 'DB接続エラー: ' . $e->getMessage();
     } 
+    //$sql = "SELECT * FROM interact";
     $sql = "SELECT * FROM sample";
     $sth = $db -> query($sql);
     $aryList = $sth -> fetchAll(PDO::FETCH_ASSOC);
@@ -25,9 +26,9 @@
     if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
         $message = filter_input(INPUT_POST, 'message');
         
-        //ハードコーディングにてユーザーの送信元と宛先を指定
-        $user_no_from = '1';
-        $user_no_to = '2';
+        //sessionよりユーザー情報の取得については実装していない。ハードコーディングで対応。
+        $user_no_from = '2';
+        $user_no_to = '1';
         $access = connectDB();
         //
         $stmt = $access -> prepare("INSERT INTO sample(user_no_from, user_no_to, message
@@ -41,7 +42,7 @@
         $stmt->bindParam(':message', $message, PDO::PARAM_STR);
         //SQL実行
         $stmt->execute();
-        header('Location:/php_db/chat.php');
+        header('Location: ./chat.php');
         exit;
     }
     // DB接続
