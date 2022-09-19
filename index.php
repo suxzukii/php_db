@@ -56,22 +56,23 @@
         //サインインIDが見つからない場合
         if (!$user) {
           $_SESSION['msg'] = 'サインインIDが一致しません。登録済みのサインインIDかご確認ください';
-          header('Location:/php_db/index.php');
+          header('Location:/./index.php');
           return;
           
         }
         //パスワードの照会
+        //ハッシュ化してパスワード比較した。上手く比較ができないので、平文で比較するロジックで実装
         if ($password == $user['password']){
           //ログイン成功
           //セッションハイジャック対策としてセッション再取得
           session_regenerate_id(true);
           $_SESSION['login_user'] = $user;
-          header('Location:/php_db/chat.php');
+          header('Location: ./chat.php');
           return;
         }else{
           //パスワードが一致しなかった場合
           $_SESSION['msg'] = 'パスワードが一致しません。';
-          header('Location:/php_db/index.php');
+          header('Location:/./index.php');
           return;
         }
       } catch (PDOException $e) {
