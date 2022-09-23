@@ -56,7 +56,7 @@
         //サインインIDが見つからない場合
         if (!$user) {
           $_SESSION['msg'] = 'サインインIDが一致しません。登録済みのサインインIDかご確認ください';
-          header('Location:/./index.php');
+          header('Location: ./index.php');
           return;
           
         }
@@ -72,7 +72,7 @@
         }else{
           //パスワードが一致しなかった場合
           $_SESSION['msg'] = 'パスワードが一致しません。';
-          header('Location:/./index.php');
+          header('Location: ./index.php');
           return;
         }
       } catch (PDOException $e) {
