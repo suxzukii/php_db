@@ -8,10 +8,13 @@
         echo 'DB接続エラー: ' . $e->getMessage();
     } 
     //$sql = "SELECT * FROM interact";
-    $sql = "SELECT * FROM sample";
+    //$sql = "SELECT * FROM sample";
+    $sql = "SELECT user.user_no,user.name,sample.user_no_from, sample.message FROM sample INNER JOIN user ON user.user_no = sample.user_no_from";
     $sth = $db -> query($sql);
     $aryList = $sth -> fetchAll(PDO::FETCH_ASSOC);
-    $record = array_column($aryList, 'user_no_from', 'message');
+    //チャット画面で表示させる連想配列の設定
+    //$record = array_column($aryList, 'user_no_from', 'message');
+    $record = array_column($aryList, 'name', 'message');
     //fetchで取り出してきたレコードを一行ずる改行
     print_r('<pre>');
     print_r($record);
